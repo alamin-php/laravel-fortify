@@ -58,7 +58,7 @@
                     <a class="nav-link active" aria-current="page" href="{{url('/')}}">Home</a>
                     <a class="nav-link" href="{{route('home')}}">Dashboard</a>
                     <a class="nav-link" href="{{route('class.index')}}">Class</a>
-                    <a class="nav-link" href="#">Students</a>
+                    <a class="nav-link" href="{{route('students.index')}}">Students</a>
                     <a class="nav-link" href="{{route('logout')}}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
