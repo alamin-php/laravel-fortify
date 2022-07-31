@@ -9,13 +9,20 @@ use DB;
 class StudentController extends Controller
 {
     /**
+     * Construct call
+     */
+    public function __construct(){
+        $this->middleware('auth');
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $students=DB::table('students')->orderby('roll', 'ASC')->get();
+        // $students=DB::table('students')->orderby('roll', 'ASC')->get();
+        $students=DB::table('students')->get();
         return view('admin.students.index',compact('students'));
     }
 
@@ -67,7 +74,8 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $data=DB::table('students')->where('id', $id)->first();
+        $data=DB::table('students')->find($id);
+        // $data=DB::table('students')->join('classess', 'students.class_id', 'classess.id')->where('id', $id)->first();
         return view('admin.students.show', compact('data'));
     }
 
