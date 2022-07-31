@@ -41,8 +41,8 @@ class StudentController extends Controller
         $validated=$request->validate([
             'class_id'=>'required',
             'name'=>'required',
-            'roll'=>'required',
-            'email'=>'required',
+            'roll'=>'required|unique:students',
+            'email'=>'required|unique:students',
             'phone'=>'required',
             'address'=>'required',
         ]);
@@ -67,7 +67,8 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        $data=DB::table('students')->where('id', $id)->first();
+        return view('admin.students.show', compact('data'));
     }
 
     /**
@@ -78,7 +79,9 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $class=DB::table('classess')->get();
+        $data=DB::table('students')->where('id', $id)->first();
+        return view('admin.students.edit', compact('data', 'class'));
     }
 
     /**
@@ -90,7 +93,22 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated=$request->validate([
+            'name'=>'required',
+            'roll'=>'required',
+            'email'=>'required',
+            'phone'=>'required',
+            'address'=>'required',
+        ]);
+        $data=array();
+        $data['class_id']=$request->class_id;
+        $data['name']=$request->name;
+        $data['roll']=$request->roll;
+        $data['email']=$request->email;
+        $data['phone']=$request->phone;
+        $data['address']=$request->address;
+        DB::table('students')->where('id', $id)->update($data);
+        return redirect()->route('students.index')->with('success', 'Data Updated Successfully');
     }
 
     /**
@@ -101,6 +119,7 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('students')->where('id', $id)->delete();
+        return redirect()->route('students.index')->with('deleted', 'Data deleted successfully');
     }
 }

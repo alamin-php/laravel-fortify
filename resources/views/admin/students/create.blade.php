@@ -12,6 +12,7 @@
             @endif
             <div class="mb-3">
               <select name="class_id" id="class_id" class="form-control @error('class_name') is-invalid @enderror">
+                <option value="">Select One</option>
                 @foreach($class as $key=>$row)
                 <option value="{{$row->id}}">{{$row->class_name}}</option>
                 @endforeach
