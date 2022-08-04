@@ -3,8 +3,10 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-class TeacherFactory extends Factory
+
+class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,9 +16,8 @@ class TeacherFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'email'=> $this->faker->unique()->safeEmail(),
-            'age'=> $this->faker->numberBetween($min = 18, $max = 35),
+            'cat_name' => $this->faker->name(),
+            'cat_slug' => Str::slug($this->faker->name()),
         ];
     }
 }
