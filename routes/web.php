@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\TeacherController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +41,9 @@ Route::get('/home', function(){
  */
 
  Route::resource('/students', StudentController::class);
+
+ /**
+  * Teacher Route
+  */
+
+  Route::resource('/teachers', TeacherController::class);
